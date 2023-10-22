@@ -37,7 +37,7 @@ function Upcoming() {
   }, []);
   return (
     <div className="">
-      <MovieList movies={movieData} />
+      <MovieList movies={movieData} tag={"Upcoming"}/>
     </div>
   );
 }

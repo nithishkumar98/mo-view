@@ -7,6 +7,7 @@ const MovieList = (props) => {
   const baseURL = "https://www.themoviedb.org";
   return (
     <div>
+    {/* <h1>{props.tag}</h1> */}
       <div class="mt-20 flex flex-wrap m-20">
         {props.movies.map((movie, index) => (
           <Card
