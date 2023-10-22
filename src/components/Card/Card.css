@@ -1,0 +1,22 @@
+.card{
+    /* border: 1px solid grey; */
+    height: 300px;
+    width: 200px;
+    margin: 10px;
+    border-radius: 6px;
+}
+
+.card-wrapper{
+    margin-top: 20px;
+}
+
+.poster-image{
+    height: 240px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.title{
+    height: 100px;
+    background: rgb(225, 225, 225);
+    border-radius: 0px 0px 10px 10px;
+}
