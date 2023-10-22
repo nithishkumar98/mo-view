@@ -18,7 +18,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
-const navItems = ["Home", "Latest", "Upcoming","Favourites"];
+const navItems = ["Home", "Now-Playing", "Upcoming", "Favourites"];
 
 function Navbar(props) {
   const { window } = props;
@@ -31,18 +31,22 @@ function Navbar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Nithish
+        Mo-view
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-            <Link
+              <Link
                 key={item}
                 to={`/${item.toLowerCase()}`}
                 sx={{ color: "#fff" }}
-                style= {{textDecoration: "none", color: "LightBlue", marginRight:"10px"}}
+                style={{
+                  textDecoration: "none",
+                  color: "LightBlue",
+                  marginRight: "10px",
+                }}
               >
                 {item}
               </Link>
@@ -75,7 +79,7 @@ function Navbar(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Nithish Kumar M
+            Mo-view
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
@@ -83,7 +87,11 @@ function Navbar(props) {
                 key={item}
                 to={`/${item.toLowerCase()}`}
                 sx={{ color: "#fff" }}
-                style= {{textDecoration: "none", color: "white", marginRight:"10px"}}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  marginRight: "10px",
+                }}
               >
                 {item}
               </Link>
