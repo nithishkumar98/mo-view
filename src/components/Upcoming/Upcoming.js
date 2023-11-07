@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MovieList from "../MovieList";
+import BasicPagination from "../Pagination/Pagination";
 
 function Upcoming() {
   //   const [searchKey,setSearchKey] = useState('')
   const [movieData, setMovieData] = useState([]);
+  const [curPage, setCurPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   //   const callBackFun = (value) => {
   //     setSearchKey(value);
@@ -15,7 +18,7 @@ function Upcoming() {
       //api end point need to write it here
       const options = {
         method: "GET",
-        url: "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+        url: `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${curPage}`,
         headers: {
           accept: "application/json",
           Authorization:
@@ -28,16 +31,25 @@ function Upcoming() {
         setMovieData(response.data.results);
         console.log("response.data.results");
         console.log(response.data.results);
+        setTotalPages(response.data.total_pages);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData(); // Immediately invoke the async function
-  }, []);
+    window.scrollTo(0, 0);
+  }, [curPage]);
+
+  const pagecallBackFun = (val) => {
+    setCurPage(val);
+  };
   return (
-    <div className="">
-      <MovieList movies={movieData} tag={"Upcoming"}/>
+    <div className="mt-28">
+      <MovieList movies={movieData} tag={"Upcoming"} />
+      <div className="flex justify-center my-10">
+        <BasicPagination pagecallBackFun={pagecallBackFun} count={totalPages} />
+      </div>
     </div>
   );
 }

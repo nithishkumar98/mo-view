@@ -3,16 +3,16 @@ import axios from "axios";
 import MovieList from "../MovieList";
 import SearchBar from "../search/SearchBar";
 import NowPlaying from "../NowPlaying/NowPlaying";
-import { useParams } from "react-router-dom";
 import "./Home.css";
+import BasicPagination from "../Pagination/Pagination";
 
 function Home() {
   const [searchKey, setSearchKey] = useState("");
   const [movieData, setMovieData] = useState([]);
-  const param = useParams();
+  const [totalPages, setTotalPages] = useState(1);
 
-  console.log("param");
-  console.log(param);
+  const [curPage, setCurPage] = useState(1);
+
 
   const callBackFun = (value) => {
     setSearchKey(value);
@@ -20,10 +20,9 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      //api end point need to write it here
       const options = {
         method: "GET",
-        url: `https://api.themoviedb.org/3/search/movie?query=${searchKey}&include_adult=false&language=en-US&page=1`,
+        url: `https://api.themoviedb.org/3/search/movie?query=${searchKey}&include_adult=false&language=en-US&page=${curPage}`,
         headers: {
           accept: "application/json",
           Authorization:
@@ -37,22 +36,36 @@ function Home() {
       try {
         const response = await axios.request(options);
         setMovieData(response.data.results);
-        console.log("response.data.results");
-        console.log(response.data.results);
+        setTotalPages(response.data.total_pages);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchData(); // Immediately invoke the async function
-  }, [searchKey]);
+    fetchData();
+    window.scrollTo(0, 0);
+  }, [searchKey, curPage]);
+
+  const pagecallBackFun = (val) => {
+    setCurPage(val);
+  };
 
   return (
     <div className="home ">
       <SearchBar callBackFun={callBackFun} />
-      {/* <h1 className="font-bold">{props.tag}</h1> */}
-        <MovieList movies={movieData} tag={"Searched Results..."} />
+      {movieData.length > 0 ? (
+        <>
+          <MovieList movies={movieData} tag={"Searched Results..."} />{" "}
+          <div className="flex justify-center my-10">
+            <BasicPagination
+              pagecallBackFun={pagecallBackFun}
+              count={totalPages}
+            />
+          </div>
+        </>
+      ) : (
         <NowPlaying />
+      )}
     </div>
   );
 }
