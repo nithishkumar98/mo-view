@@ -20,3 +20,17 @@
     background: rgb(225, 225, 225);
     border-radius: 0px 0px 10px 10px;
 } */
+
+.progress-rounded{
+    position: absolute;
+    top: -2%;
+    left: 77%;
+    border: 3px solid;
+   
+    border-radius: 50%;
+    height: 40px;
+    font-weight: 600;
+    font-size: 12px;
+    width: 40px;
+    background-color: rgb(255, 255, 255);
+}

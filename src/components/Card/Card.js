@@ -4,10 +4,20 @@ import BasicModal from "../Modal/BasicModal";
 const Card = (props) => {
   // console.log("props");
   // console.log(props);
+  let colorr = "rgb(179, 0, 0)";
+  if (props.data.vote_average.toFixed(0) > 5) {
+    colorr = "rgb(0, 179, 128)";
+  }
   return (
     <div>
-      <div className="card-wrapper">
-        <div className="card flex justify-center flex-col bg-slate-200 text-align-center pb-5">
+      <div className="card-wrapper relative">
+        <div
+          style={{ borderColor: `${colorr}` }}
+          className=" progress-rounded flex justify-center items-center"
+        >
+          {props.data.vote_average.toFixed(1)}
+        </div>
+        <div className="card flex justify-center flex-col bg-slate-200 text-align-center h-12 pb-5">
           <img
             className="poster-image "
             src={props.baseURL + "/t/p/w220_and_h330_face" + props.poster}
