@@ -11,7 +11,7 @@ const Card = (props) => {
             className="poster-image "
             src={props.baseURL + "/t/p/w220_and_h330_face" + props.poster}
           />
-          <h1 className="title p-2 text-xs font-bold">{props.title}</h1>
+          <h1 className="title p-2 text-xs font-bold underline">{props.title}</h1>
           <h1>{props.orignalTitle}</h1>
         </div>
       </div>

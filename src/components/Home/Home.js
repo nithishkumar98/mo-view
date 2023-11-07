@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useParam } from "react";
 import axios from "axios";
 import MovieList from "../MovieList";
 import SearchBar from "../search/SearchBar";
 import NowPlaying from "../NowPlaying/NowPlaying";
+import { useParams } from "react-router-dom";
+import "./Home.css";
 
 function Home() {
-    const [searchKey,setSearchKey] = useState('')
+  const [searchKey, setSearchKey] = useState("");
   const [movieData, setMovieData] = useState([]);
+  const param = useParams();
 
-    const callBackFun = (value) => {
-      setSearchKey(value);
-    }
+  console.log("param");
+  console.log(param);
+
+  const callBackFun = (value) => {
+    setSearchKey(value);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,8 +31,8 @@ function Home() {
         },
       };
 
-      console.log('options.url')
-      console.log(options.url)
+      console.log("options.url");
+      console.log(options.url);
 
       try {
         const response = await axios.request(options);
@@ -40,11 +46,13 @@ function Home() {
 
     fetchData(); // Immediately invoke the async function
   }, [searchKey]);
+
   return (
-    <div className="">
-      <SearchBar  callBackFun={callBackFun} />
-      <MovieList movies={movieData} tag={'Searched Results...'} />
-      <NowPlaying />
+    <div className="home ">
+      <SearchBar callBackFun={callBackFun} />
+      {/* <h1 className="font-bold">{props.tag}</h1> */}
+        <MovieList movies={movieData} tag={"Searched Results..."} />
+        <NowPlaying />
     </div>
   );
 }
